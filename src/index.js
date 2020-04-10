@@ -21,12 +21,23 @@ function handleInput(e) {
   fetchCountries(inputValue)
     .then(data => {
       if (data.status >= 400) {
-        PNotify.error({
-          text: 'Too many matches found. Please enter a more specific query!',
+        const errors = PNotify.error({
+          title: 'Oh No!',
+          text: 'Something terrible happened.',
+          modules: {
+            Buttons: {
+              closer: false,
+              sticker: false,
+            },
+          },
+        });
+        errors.on('click', function () {
+          errors.close();
         });
         return;
       }
       createMarkup(data);
+      PNotify.closeAll();
     })
     .catch(error => console.error('ERROR---', error));
 }

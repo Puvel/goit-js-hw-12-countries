@@ -19,8 +19,17 @@ export default function (data) {
     refs.countriesList.innerHTML = createMarkupItem;
   }
   if (data.length > 10) {
-    PNotify.notice({
+    const notice = PNotify.notice({
       text: 'Too many matches found. Please enter a more specific query!',
+      modules: {
+        Buttons: {
+          closer: false,
+          sticker: false,
+        },
+      },
+    });
+    notice.on('click', function () {
+      notice.close();
     });
   }
 }
