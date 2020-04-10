@@ -1,0 +1,24 @@
+<section class="country">
+  <h2 class="countryName">{{name}}</h2>
+  <ul class="countryInfo">
+    <li class="capital">
+      <h3 class="capitalTiile">Capital: <span class="capitalName">{{capital}}</span></h3>
+    </li>
+    <li class="population">
+      <h3 class="populationItemTiile">Population: <span class="populationName">{{population}}</span></h3>
+    </li>
+    <li class="languages">
+      <ul class="languagesList">
+        <h3 class="languagesItemTiile">Languages:</h3>
+        {{#each languages}}
+        <li class="languagesItem">
+          <p class="language">{{this.name}}</p>
+        </li>
+        {{/each}}
+      </ul>
+    </li>
+    <li class="flag">
+      <img src="{{flag}}" alt="{{name}}'s flag" width="500" height="400">
+    </li>
+  </ul>
+</section>
