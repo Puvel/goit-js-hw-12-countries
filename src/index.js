@@ -3,6 +3,7 @@ import 'pnotify/dist/PNotifyBrightTheme.css';
 import debounce from 'lodash.debounce';
 import createMarkup from './js/createMarkup';
 import fetchCountries from './js/fetchCountries';
+import PNotify from 'pnotify/dist/es/PNotify.js';
 
 const refs = {
   countriesList: document.querySelector('.countries'),
@@ -18,6 +19,14 @@ function handleInput(e) {
     return;
   }
   fetchCountries(inputValue)
-    .then(data => createMarkup(data))
+    .then(data => {
+      if (data.status >= 400) {
+        PNotify.error({
+          text: 'Too many matches found. Please enter a more specific query!',
+        });
+        return;
+      }
+      createMarkup(data);
+    })
     .catch(error => console.error('ERROR---', error));
 }
